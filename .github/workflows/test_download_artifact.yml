@@ -1,20 +1,20 @@
-name: Run on PR
-run-name: Run on PR
+name: Test Download Artifact
+run-name: Test Download Artifact
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [labeled]
 defaults:
   run:
     shell: bash
 jobs:
-  test-download:
+  check-chache:
     runs-on: ubuntu-latest
     steps:
-      - name: Download file
-        uses: actions/download-artifact@v4
+      - name: Restore Cache
+        uses: actions/cache/restore@v4
         with:
-          name: pr-artifact
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: pr.txt
+          key: pr-artifact
 
       - name: Read file
         run: cat pr.txt
