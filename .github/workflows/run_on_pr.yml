@@ -1,0 +1,21 @@
+name: Run on PR
+run-name: Run on PR
+on:
+  pull_request:
+    types: [opened, synchronize]
+defaults:
+  run:
+    shell: bash
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write to file
+        run: |
+          echo "This is a PR" > pr.txt
+
+      - name: Upload file
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr
+          path: pr.txt
