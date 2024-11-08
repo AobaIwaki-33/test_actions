@@ -23,3 +23,15 @@ jobs:
           name: pr-artifact
           path: pr.txt
           retention-days: 1
+
+  test-download:
+    runs-on: ubuntu-latest
+    needs: write
+    steps:
+      - name: Download file
+        uses: actions/download-artifact@v4
+        with:
+          name: pr-artifact
+
+      - name: Read file
+        run: cat pr.txt
