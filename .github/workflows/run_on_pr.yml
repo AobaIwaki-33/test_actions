@@ -1,0 +1,37 @@
+name: Run on PR
+run-name: Run on PR
+on:
+  pull_request:
+    types: [opened, synchronize]
+defaults:
+  run:
+    shell: bash
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write to file
+        run: |
+          echo "This is a PR" > pr.txt
+
+      - name: Read file
+        run: cat pr.txt
+
+      - name: Cache file
+        uses: actions/cache@v4
+        with:
+          path: pr.txt
+          key: pr-artifact
+
+  check-chache:
+    runs-on: ubuntu-latest
+    needs: write
+    steps:
+      - name: Restore Cache
+        uses: actions/cache/restore@v4
+        with:
+          path: pr.txt
+          key: pr-artifact
+
+      - name: Read file
+        run: cat pr.txt

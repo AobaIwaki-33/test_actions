@@ -10,6 +10,14 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
+      - name: Download file
+        uses: actions/download-artifact@v4
+        with:
+          name: pr-artifact
+
+      - name: Read file
+        run: cat pr.txt
+
       - name: Check if PR was merged
         run: |
           if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
