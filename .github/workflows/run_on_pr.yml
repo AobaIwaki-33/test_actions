@@ -22,3 +22,4 @@ jobs:
         with:
           name: pr-artifact
           path: pr.txt
+          retention-days: 1
