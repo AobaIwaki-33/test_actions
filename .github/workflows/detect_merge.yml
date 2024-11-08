@@ -13,7 +13,7 @@ jobs:
       - name: Download file
         uses: actions/download-artifact@v4
         with:
-          name: pr
+          name: pr-artifact
 
       - name: Read file
         run: cat pr.txt

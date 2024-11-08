@@ -20,5 +20,5 @@ jobs:
       - name: Upload file
         uses: actions/upload-artifact@v4
         with:
-          name: pr
+          name: pr-artifact
           path: pr.txt
